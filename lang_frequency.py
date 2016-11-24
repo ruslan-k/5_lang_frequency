@@ -8,15 +8,15 @@ def load_data(filepath):
 
 def get_most_frequent_words(text):
     # список всех слов (выражение учитывает английский слова и кириллицу, слова не должны начинаться или заканчиваться c "-")
-    word_list = re.findall(r"[а-яА-ЯA-Za-z]+-[а-яА-ЯA-Za-z]+|[а-яА-ЯA-Za-z]+", text, re.UNICODE)
+    word_list_re = re.findall(r"[а-яА-ЯA-Za-z]+-[а-яА-ЯA-Za-z]+|[а-яА-ЯA-Za-z]+", text, re.UNICODE)
     # список всех слов c маленькой буквы
-    text_list = [word.lower() for word in word_list]
+    word_list_re = [word.lower() for word in word_list_re]
 
     # осталвнеие списка {слово: число (как часто встречается)}
-    words_dict = Counter(text_list)
+    words_dict_count = Counter(word_list_re)
 
     # вывод top 10
-    for word, num in words_dict.most_common()[:10]:
+    for word, num in words_dict_count.most_common()[:10]:
         print("{}: {}".format(word, num))
 
 if __name__ == '__main__':
