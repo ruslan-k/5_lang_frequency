@@ -12,7 +12,7 @@ def get_most_frequent_words(text):
     # список всех слов c маленькой буквы
     word_list_re = [word.lower() for word in word_list_re]
 
-    # осталвнеие списка {слово: число (как часто встречается)}
+    # cоставление списка вида {слово: число (как часто встречается)}
     words_dict_count = Counter(word_list_re)
 
     # вывод top 10
