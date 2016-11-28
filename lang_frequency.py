@@ -1,3 +1,4 @@
+import sys
 from collections import Counter
 import re
 
@@ -8,7 +9,7 @@ def load_data(filepath):
 
 def get_most_frequent_words(text):
     # список всех слов (выражение учитывает английский слова и кириллицу, слова не должны начинаться или заканчиваться c "-")
-    word_list_re = re.findall(r"[а-яА-ЯA-Za-z]+-[а-яА-ЯA-Za-z]+|[а-яА-ЯA-Za-z]+", text, re.UNICODE)
+    word_list_re = re.findall(r"[а-яА-ЯA-Za-z]+-?[а-яА-ЯA-Za-z]+", text, re.UNICODE)
     # список всех слов c маленькой буквы
     word_list_re = [word.lower() for word in word_list_re]
 
@@ -20,4 +21,8 @@ def get_most_frequent_words(text):
         print("{}: {}".format(word, num))
 
 if __name__ == '__main__':
-    print(get_most_frequent_words(load_data('text.txt')))
+    try:
+        filename = sys.argv[1]
+        print(get_most_frequent_words(load_data(filename)))
+    except FileNotFoundError:
+        print("Неверный путь к файлу или имя файла")
