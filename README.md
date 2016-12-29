@@ -1,11 +1,11 @@
 # 5_lang_frequency
 
-Скрипт выводит список
+Скрипт выводит список 10 наиболее встречаемых слов и частоту их упоминаний в тексте.
 
 Применение:
 
 ```
-python3 bars.py filename
+python3.5 bars "filepath"
 ```
 
-filename - путь к файлу json
+filepath - путь к файлу

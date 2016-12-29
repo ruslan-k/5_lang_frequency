@@ -7,22 +7,25 @@ def load_data(filepath):
         return infile.read()
 
 
-def get_most_frequent_words(text):
-    # список всех слов (выражение учитывает английский слова и кириллицу, слова не должны начинаться или заканчиваться c "-")
-    word_list_re = re.findall(r"[а-яА-ЯA-Za-z]+-?[а-яА-ЯA-Za-z]+", text, re.UNICODE)
-    # список всех слов c маленькой буквы
-    word_list_re = [word.lower() for word in word_list_re]
+def get_most_frequent_words(filename):
+    text = load_data(filename)
+    all_words_in_text = re.findall(r"[а-яА-ЯA-Za-z]+-?[а-яА-ЯA-Za-z]+", text, re.UNICODE)
+    all_words_in_text_lower = [word.lower() for word in all_words_in_text]
+    counted_words = Counter(all_words_in_text_lower)
 
-    # cоставление списка вида {слово: число (как часто встречается)}
-    words_dict_count = Counter(word_list_re)
+    return counted_words
 
-    # вывод top 10
-    for word, num in words_dict_count.most_common()[:10]:
-        print("{}: {}".format(word, num))
+
+def print_frequent_words(data):
+    top_10_common_words = data.most_common()[:10]
+    for word, rate in top_10_common_words:
+        print("{}: {}".format(word, rate))
+
 
 if __name__ == '__main__':
     try:
         filename = sys.argv[1]
-        print(get_most_frequent_words(load_data(filename)))
+        frequent_words = get_most_frequent_words(filename)
+        print(print_frequent_words(frequent_words))
     except FileNotFoundError:
         print("Неверный путь к файлу или имя файла")
